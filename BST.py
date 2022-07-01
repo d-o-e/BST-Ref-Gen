@@ -6,6 +6,13 @@ class Node:
 	def node(self):
 		return self.val
 
+	"""
+		@node.setter
+		def node(self, value):
+			self.val = value
+	"""
+
+	# Overloading  == , > , str operators
 	def __eq__(self, other):
 		return self.val == other.val
 
@@ -17,13 +24,6 @@ class Node:
 
 	def __str__(self):
 		return str(self.val)
-
-
-"""
-	@node.setter
-	def node(self, value):
-		self.val = value
-"""
 
 
 class BinarySearchTree:
