@@ -1,6 +1,7 @@
 class Node:
 	def __init__(self, val = None):
 		self.queue = 0
+		# TODO: 7/2/22 change it to a queue and to a simple list after
 		self.word = val
 
 	@property
@@ -61,7 +62,6 @@ class BinarySearchTree:
 			self.right.print_inorder()
 
 
-"""
 class Queue:
 	def __init__(self, node = None):
 		self.val = node
@@ -82,4 +82,9 @@ class Queue:
 			self.dequeue()
 		else:
 			return self.val
-"""
+
+	class QNode:
+		def __init__(self, data = None):
+			self.data = data
+
+
