@@ -1,7 +1,11 @@
 class Leaf:
 	def __init__(self, val = None):
 		self.next = None
-		self.data = val
+		self._data = val
+
+	@property
+	def data(self):
+		return self._data
 
 	def enqueue(self, new_data):
 		if self.next:
@@ -9,12 +13,12 @@ class Leaf:
 		else:
 			self.next = Leaf(new_data)
 
-	def all_data(self) -> ():
+	def all_data(self) -> []:
 		cursor = self
-		alldata = ()
-		while self.next:
-			alldata.append(cursor.data)
+		alldata = [self.data]
+		while cursor.next:
 			cursor = cursor.next
+			alldata.append(self.data)
 		return alldata
 
 	# Overloading  == , > , str operators
@@ -28,13 +32,17 @@ class Leaf:
 			return False
 
 	def __str__(self):
-		cursor = self
-		whole = "Leaf Node: (" + str(cursor.data)
-		while cursor.next:
-			whole += ', ' + str(cursor.data)
-			cursor = cursor.next
-		whole += ')'
-		return str(whole)
+		return str(self.all_data())
+
+	# Different all data print option
+	# def __str__(self):
+	# 	cursor = self
+	# 	whole = "Leaf Node: (" + str(cursor.data)
+	# 	while cursor.next:
+	# 		whole += ', ' + str(cursor.data)
+	# 		cursor = cursor.next
+	# 	whole += ')'
+	# 	return str(whole)
 
 
 class BinarySearchTree:
