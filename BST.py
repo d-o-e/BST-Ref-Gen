@@ -52,6 +52,11 @@ class BinarySearchTree:
 		self.right = None
 
 	def insert(self, new_node):
+		"""
+		Inserts data to the tree
+		:param new_node: Data to store
+		:return:
+		"""
 		if not self.leaf:
 			self.leaf = Leaf(new_node)
 			return
@@ -72,6 +77,9 @@ class BinarySearchTree:
 		self.right = BinarySearchTree(Leaf(new_node))
 
 	def print_inorder(self):
+		"""
+		Prints the tree depth first order
+		"""
 		if self.left:
 			self.left.print_inorder()
 		if self.leaf:
