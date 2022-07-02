@@ -1,28 +1,40 @@
-class Node:
+class Leaf:
 	def __init__(self, val = None):
-		self.queue = 0
-		# TODO: 7/2/22 change it to a queue and to a simple list after
-		self.word = val
+		self.next = None
+		self.data = val
 
-	@property
-	def get_word(self):
-		return self.word
+	def enqueue(self, new_data):
+		if self.next:
+			self.next.enqueue(new_data)
+		else:
+			self.next = Leaf(new_data)
 
-	def increment_queue(self):
-		self.queue += 1
+	def all_data(self) -> ():
+		cursor = self
+		alldata = ()
+		while self.next:
+			alldata.append(cursor.data)
+			cursor = cursor.next
+		return alldata
 
 	# Overloading  == , > , str operators
 	def __eq__(self, other):
-		return self.word == other.word
+		return self.data == other
 
 	def __gt__(self, other):
-		if self.word > other.word:
+		if self.data > other:
 			return True
 		else:
 			return False
 
 	def __str__(self):
-		return str(self.word)
+		cursor = self
+		whole = "Leaf Node: (" + str(cursor.data)
+		while cursor.next:
+			whole += ', ' + str(cursor.data)
+			cursor = cursor.next
+		whole += ')'
+		return str(whole)
 
 
 class BinarySearchTree:
@@ -33,25 +45,23 @@ class BinarySearchTree:
 
 	def insert(self, new_node):
 		if not self.leaf:
-			self.leaf = new_node
+			self.leaf = Leaf(new_node)
 			return
 
 		if self.leaf == new_node:
-			self.leaf.increment_queue()
+			self.leaf.enqueue(new_node)
 			return
 
 		if new_node < self.leaf:
 			if self.left:
 				self.left.insert(new_node)
 				return
-			self.left = BinarySearchTree(new_node)
+			self.left = BinarySearchTree(Leaf(new_node))
 			return
 		elif self.right:
 			self.right.insert(new_node)
 			return
-		self.right = BinarySearchTree(new_node)
-
-	# will add delete function
+		self.right = BinarySearchTree(Leaf(new_node))
 
 	def print_inorder(self):
 		if self.left:
@@ -60,31 +70,3 @@ class BinarySearchTree:
 			print(self.leaf, end = " ")
 		if self.right is not None:
 			self.right.print_inorder()
-
-
-class Queue:
-	def __init__(self, node = None):
-		self.val = node
-		self.next = None
-
-	@property
-	def get_value(self):
-		return self.val
-
-	def enqueue(self, node):
-		if self.next:
-			self.next.enqueue(node)
-		else:
-			self.val = node
-
-	def dequeue(self) -> Node:
-		if self.next:
-			self.dequeue()
-		else:
-			return self.val
-
-	class QNode:
-		def __init__(self, data = None):
-			self.data = data
-
-
