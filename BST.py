@@ -1,48 +1,45 @@
 class Node:
 	def __init__(self, val = None):
-		self.val = val
+		self.queue = 0
+		self.word = val
 
 	@property
-	def node(self):
-		return self.val
+	def get_word(self):
+		return self.word
 
-	"""
-		@node.setter
-		def node(self, value):
-			self.val = value
-	"""
+	def increment_queue(self):
+		self.queue += 1
 
 	# Overloading  == , > , str operators
 	def __eq__(self, other):
-		return self.val == other.val
+		return self.word == other.word
 
 	def __gt__(self, other):
-		if self.val > other.val:
+		if self.word > other.word:
 			return True
 		else:
 			return False
 
 	def __str__(self):
-		return str(self.val)
+		return str(self.word)
 
 
 class BinarySearchTree:
 	def __init__(self, node = None):
+		self.leaf = node
 		self.left = None
 		self.right = None
-		self.node = node  # will be changed to a queue
 
 	def insert(self, new_node):
-		if not self.node:
-			self.node = new_node
+		if not self.leaf:
+			self.leaf = new_node
 			return
 
-		if self.node == new_node:
-			print(f"{self.node} and {new_node} equal vals ")
-			# insert to the queue
+		if self.leaf == new_node:
+			self.leaf.increment_queue()
 			return
 
-		if new_node < self.node:
+		if new_node < self.leaf:
 			if self.left:
 				self.left.insert(new_node)
 				return
@@ -55,10 +52,34 @@ class BinarySearchTree:
 
 	# will add delete function
 
-	def printInorder(self):
-		if self.left is not None:
-			self.left.printInorder()
-		if self.node is not None:
-			print(self.node, end = " ")
+	def print_inorder(self):
+		if self.left:
+			self.left.print_inorder()
+		if self.leaf:
+			print(self.leaf, end = " ")
 		if self.right is not None:
-			self.right.printInorder()
+			self.right.print_inorder()
+
+
+"""
+class Queue:
+	def __init__(self, node = None):
+		self.val = node
+		self.next = None
+
+	@property
+	def get_value(self):
+		return self.val
+
+	def enqueue(self, node):
+		if self.next:
+			self.next.enqueue(node)
+		else:
+			self.val = node
+
+	def dequeue(self) -> Node:
+		if self.next:
+			self.dequeue()
+		else:
+			return self.val
+"""
