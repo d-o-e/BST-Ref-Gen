@@ -7,7 +7,6 @@ split_delimiters = r'[\s,.?\"\-!\n\t]'
 class DataReader:
 	"""Data reader class"""
 	def __init__(self, filename = None):
-		self.filename = filename
 		self._words = {}
 		try:
 			with open(filename, "r") as fout:
