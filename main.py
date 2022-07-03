@@ -1,5 +1,5 @@
 from BST import BinarySearchTree as Bst
-from random import randint as rand
+from BST import Leaf
 from DataReader import DataReader as Reader
 
 
@@ -11,10 +11,14 @@ def main():
 
 	reader = Reader("speech.txt")
 
-	for val in reader.words: print(val, reader.words[val])
-	# for word in reader.words: my_tree.insert(word)
+	for val in reader.words.keys():
+		for word in reader.words[val]:
+			my_tree.insert(Leaf((val, word)))
+	del reader, word, val
 	# my_tree.print_inorder()
 	# del my_tree
+
+	my_tree.search("of")
 
 
 if __name__ == '__main__':
