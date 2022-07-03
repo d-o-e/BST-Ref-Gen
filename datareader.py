@@ -1,5 +1,6 @@
 import errno
 import re
+from sys import stderr as error
 
 
 split_delimiters = r'[\s,.?\"\-!\n\t]'
@@ -12,14 +13,16 @@ class DataReader:
     def __init__(self, filename = None):
         self._words = {}
         try:
-            with open(filename, "r") as fout:
+            with open(filename, "r") as file_out:
                 line_number = 1
-                for line in fout:
-                    temp_words = list(filter(lambda word:word, re.split(split_delimiters, line.strip())))
-                    if temp_words: self._words[line_number] = temp_words
+                for line in file_out:
+                    temp_words = filter(lambda word: word, re.split(
+                        split_delimiters, line.strip()))
+                    if temp_words:
+                        self._words[line_number] = list(temp_words)
                     line_number += 1
         except FileExistsError:
-            print(f"{errno.ENOENT}: File not found")
+            print(f"{errno.ENOENT}: File not found", file = error)
 
 
     @property

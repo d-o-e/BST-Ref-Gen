@@ -1,5 +1,4 @@
 from threading import Thread
-
 from bst import BinarySearchTree as Bst, Leaf
 from datareader import DataReader as Reader
 
