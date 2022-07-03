@@ -1,8 +1,7 @@
 from threading import Thread
-from time import sleep
 
-from BST import BinarySearchTree as Bst, Leaf
-from DataReader import DataReader as Reader
+from bst import BinarySearchTree as Bst, Leaf
+from datareader import DataReader as Reader
 
 
 my_tree = Bst()
@@ -27,7 +26,7 @@ def main():
     print_tread = Thread(target = print_tree)
     read_thread = Thread(target = read_file)
     read_thread.start()
-    read_thread.join() # uncomment to remove the join and break the program
+    read_thread.join()  # uncomment to remove the join and break the program
     print_tread.start()
 
 
