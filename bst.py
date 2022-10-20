@@ -1,6 +1,7 @@
 # Deniz Erisgen ©
 from sys import stderr as error
 
+
 class Leaf:
     def __init__(self, val = None):
         if val is not None:
