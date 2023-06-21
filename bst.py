@@ -1,19 +1,18 @@
 # Deniz Erisgen ©
 from sys import stderr as error
 
+
 class Leaf:
-    def __init__(self, val = None):
+    def __init__(self, val=None):
         if val is not None:
             self.lines = [val[0]]
             self._data = val[1]
         else:
             self._data = None
 
-
     @property
     def data(self):
         return self._data
-
 
     def add_line_number(self, leaf) -> bool:
         if leaf is not None and leaf.lines is not None:
@@ -27,13 +26,11 @@ class Leaf:
     def __eq__(self, other):
         return self.data == other.data
 
-
     def __gt__(self, other):
         if self.data > other.data:
             return True
         else:
             return False
-
 
     def __str__(self):
         if self.data:
@@ -54,14 +51,13 @@ class Leaf:
 
 
 class BinarySearchTree:
-    def __init__(self, node = None):
+    def __init__(self, node=None):
         if node is not None:
             self.leaf = node
             self.left = None
             self.right = None
         else:
             self.leaf = None
-
 
     def insert(self, new_node):
         """
@@ -70,7 +66,7 @@ class BinarySearchTree:
         :return:
         """
         if new_node is None:
-            print("Node is not defined", file = error)
+            print("Node is not defined", file=error)
             return
 
         if not self.leaf:
@@ -94,7 +90,6 @@ class BinarySearchTree:
             return
         self.right = BinarySearchTree(new_node)
 
-
     def print_inorder(self):
         """
         Prints the tree depth first order
@@ -102,13 +97,13 @@ class BinarySearchTree:
         if self.left:
             self.left.print_inorder()
         if self.leaf:
-            print(self.leaf, end = " ")
+            print(self.leaf, end=" ")
         if self.right is not None:
             self.right.print_inorder()
 
-
     def search(self, term):
-        if term is None: return
+        if term is None:
+            return
         cursor = self
         if term == cursor.leaf.data:
             print(cursor.leaf)
